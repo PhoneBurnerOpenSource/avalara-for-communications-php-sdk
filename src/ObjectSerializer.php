@@ -29,7 +29,7 @@
 
 namespace PhoneBurner\AvalaraAFC;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
 use PhoneBurner\AvalaraAFC\Model\ModelInterface;
@@ -45,15 +45,12 @@ use SplFileObject;
  */
 class ObjectSerializer
 {
-    /** @var string */
-    private static $dateTimeFormat = DateTimeInterface::ATOM;
+    private static string $dateTimeFormat = DateTimeInterface::ATOM;
 
     /**
      * Change the date format
-     *
-     * @param string $format   the new date format to use
      */
-    public static function setDateTimeFormat($format)
+    public static function setDateTimeFormat(string $format)
     {
         self::$dateTimeFormat = $format;
     }
@@ -71,7 +68,7 @@ class ObjectSerializer
             return $data;
         }
         
-        if ($data instanceof DateTime) {
+        if ($data instanceof DateTimeImmutable) {
             return ($format === 'date') ? $data->format('Y-m-d') : $data->format(self::$dateTimeFormat);
         }
         
@@ -90,7 +87,7 @@ class ObjectSerializer
                     $getter = $data::getters()[$property];
                     $value = $data->$getter();
                     if ($value !== null
-                        && !in_array($openAPIType, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)
+                        && !in_array($openAPIType, ['DateTimeImmutable', 'DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)
                         && method_exists($openAPIType, 'getAllowableEnumValues')
                         && !in_array($value, $openAPIType::getAllowableEnumValues(), true)) {
                         $imploded = implode("', '", $openAPIType::getAllowableEnumValues());
@@ -147,7 +144,7 @@ class ObjectSerializer
      * If it's a string, pass through unchanged. It will be url-encoded
      * later.
      *
-     * @param string[]|string|\DateTime $object an object to be serialized to a string
+     * @param string[]|string|\DateTimeImmutable $object an object to be serialized to a string
      *
      * @return string the serialized object
      */
@@ -202,13 +199,13 @@ class ObjectSerializer
      * If it's a datetime object, format it in ISO8601
      * If it's a boolean, convert it to "true" or "false".
      *
-     * @param string|bool|\DateTime $value the value of the parameter
+     * @param string|bool|\DateTimeImmutable $value the value of the parameter
      *
      * @return string the header string
      */
     public static function toString($value)
     {
-        if ($value instanceof DateTime) { // datetime in ISO8601 format
+        if ($value instanceof DateTimeImmutable) { // datetime in ISO8601 format
             return $value->format(self::$dateTimeFormat);
         }
 
@@ -302,7 +299,7 @@ class ObjectSerializer
             return $data;
         }
 
-        if ($class === '\DateTime') {
+        if ($class === DateTimeImmutable::class) {
             // Some API's return an invalid, empty string as a
             // date-time property. DateTime::__construct() will return
             // the current time for empty input which is probably not
@@ -310,13 +307,13 @@ class ObjectSerializer
             // be interpreted as a missing field/value. Let's handle
             // this graceful.
             if (!empty($data)) {
-                return new DateTime($data);
+                return new DateTimeImmutable($data);
             }
 
             return null;
         }
 
-        if (in_array($class, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
+        if (in_array($class, ['DateTimeImmutable', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
             settype($data, $class);
             return $data;
         }

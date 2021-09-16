@@ -29,8 +29,9 @@
 
 namespace PhoneBurner\AvalaraAFC\Model;
 
-use \ArrayAccess;
-use \PhoneBurner\AvalaraAFC\ObjectSerializer;
+use ArrayAccess;
+use DateTimeImmutable;
+use PhoneBurner\AvalaraAFC\ObjectSerializer;
 
 /**
  * LineItem Class Doc Comment
@@ -43,24 +44,22 @@ use \PhoneBurner\AvalaraAFC\ObjectSerializer;
  */
 class LineItem implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
-      *
-      * @var string
       */
-    protected static $openAPIModelName = 'LineItem';
+    protected static string $openAPIModelName = 'LineItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $openAPITypes = [
+    protected static array $openAPITypes = [
         'ref' => 'string',
-        'from' => '\PhoneBurner\AvalaraAFC\Model\Location',
-        'to' => '\PhoneBurner\AvalaraAFC\Model\Location',
+        'from' => Location::class,
+        'to' => Location::class,
         'chg' => 'double',
         'line' => 'int',
         'loc' => 'int',
@@ -78,10 +77,10 @@ class LineItem implements ModelInterface, ArrayAccess
         'disc' => 'int',
         'opt' => '\PhoneBurner\AvalaraAFC\Model\KeyValuePair[]',
         'prop' => 'int',
-        'bill' => '\PhoneBurner\AvalaraAFC\Model\Location',
+        'bill' => Location::class,
         'cust' => 'int',
         'lfln' => 'bool',
-        'date' => '\DateTime',
+        'date' => DateTimeImmutable::class,
         'qty' => 'int',
         'glref' => 'string'
     ];
@@ -91,7 +90,7 @@ class LineItem implements ModelInterface, ArrayAccess
       *
       * @var string[]
       */
-    protected static $openAPIFormats = [
+    protected static array $openAPIFormats = [
         'ref' => null,
         'from' => null,
         'to' => null,
@@ -122,20 +121,16 @@ class LineItem implements ModelInterface, ArrayAccess
 
     /**
      * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
      */
-    public static function openAPITypes()
+    public static function openAPITypes(): array
     {
         return self::$openAPITypes;
     }
 
     /**
      * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
      */
-    public static function openAPIFormats()
+    public static function openAPIFormats(): array
     {
         return self::$openAPIFormats;
     }
@@ -146,7 +141,7 @@ class LineItem implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'ref' => 'ref',
         'from' => 'from',
         'to' => 'to',
@@ -180,7 +175,7 @@ class LineItem implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'ref' => 'setRef',
         'from' => 'setFrom',
         'to' => 'setTo',
@@ -214,7 +209,7 @@ class LineItem implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'ref' => 'getRef',
         'from' => 'getFrom',
         'to' => 'getTo',
@@ -246,30 +241,24 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
-     *
-     * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -279,7 +268,7 @@ class LineItem implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$openAPIModelName;
     }
@@ -290,233 +279,138 @@ class LineItem implements ModelInterface, ArrayAccess
 
     /**
      * Associative array for storing property values
-     *
-     * @var mixed[]
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['ref'] = isset($data['ref']) ? $data['ref'] : null;
-        $this->container['from'] = isset($data['from']) ? $data['from'] : null;
-        $this->container['to'] = isset($data['to']) ? $data['to'] : null;
-        $this->container['chg'] = isset($data['chg']) ? $data['chg'] : null;
-        $this->container['line'] = isset($data['line']) ? $data['line'] : null;
-        $this->container['loc'] = isset($data['loc']) ? $data['loc'] : null;
-        $this->container['min'] = isset($data['min']) ? $data['min'] : null;
-        $this->container['sale'] = isset($data['sale']) ? $data['sale'] : null;
-        $this->container['plsp'] = isset($data['plsp']) ? $data['plsp'] : null;
-        $this->container['incl'] = isset($data['incl']) ? $data['incl'] : null;
-        $this->container['pror'] = isset($data['pror']) ? $data['pror'] : null;
-        $this->container['proadj'] = isset($data['proadj']) ? $data['proadj'] : null;
-        $this->container['tran'] = isset($data['tran']) ? $data['tran'] : null;
-        $this->container['serv'] = isset($data['serv']) ? $data['serv'] : null;
-        $this->container['dbt'] = isset($data['dbt']) ? $data['dbt'] : null;
-        $this->container['adj'] = isset($data['adj']) ? $data['adj'] : null;
-        $this->container['adjm'] = isset($data['adjm']) ? $data['adjm'] : null;
-        $this->container['disc'] = isset($data['disc']) ? $data['disc'] : null;
-        $this->container['opt'] = isset($data['opt']) ? $data['opt'] : null;
-        $this->container['prop'] = isset($data['prop']) ? $data['prop'] : null;
-        $this->container['bill'] = isset($data['bill']) ? $data['bill'] : null;
-        $this->container['cust'] = isset($data['cust']) ? $data['cust'] : null;
-        $this->container['lfln'] = isset($data['lfln']) ? $data['lfln'] : null;
-        $this->container['date'] = isset($data['date']) ? $data['date'] : null;
-        $this->container['qty'] = isset($data['qty']) ? $data['qty'] : null;
-        $this->container['glref'] = isset($data['glref']) ? $data['glref'] : null;
+        $this->container['ref'] = $data['ref'] ?? null;
+        $this->container['from'] = $data['from'] ?? null;
+        $this->container['to'] = $data['to'] ?? null;
+        $this->container['chg'] = $data['chg'] ?? null;
+        $this->container['line'] = $data['line'] ?? null;
+        $this->container['loc'] = $data['loc'] ?? null;
+        $this->container['min'] = $data['min'] ?? null;
+        $this->container['sale'] = $data['sale'] ?? null;
+        $this->container['plsp'] = $data['plsp'] ?? null;
+        $this->container['incl'] = $data['incl'] ?? null;
+        $this->container['pror'] = $data['pror'] ?? null;
+        $this->container['proadj'] = $data['proadj'] ?? null;
+        $this->container['tran'] = $data['tran'] ?? null;
+        $this->container['serv'] = $data['serv'] ?? null;
+        $this->container['dbt'] = $data['dbt'] ?? null;
+        $this->container['adj'] = $data['adj'] ?? null;
+        $this->container['adjm'] = $data['adjm'] ?? null;
+        $this->container['disc'] = $data['disc'] ?? null;
+        $this->container['opt'] = $data['opt'] ?? null;
+        $this->container['prop'] = $data['prop'] ?? null;
+        $this->container['bill'] = $data['bill'] ?? null;
+        $this->container['cust'] = $data['cust'] ?? null;
+        $this->container['lfln'] = $data['lfln'] ?? null;
+        $this->container['date'] = $data['date'] ?? null;
+        $this->container['qty'] = $data['qty'] ?? null;
+        $this->container['glref'] = $data['glref'] ?? null;
     }
 
-    /**
-     * Show all the invalid properties with reasons.
-     *
-     * @return array invalid properties with reasons
-     */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
      * return true if all passed
-     *
-     * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
 
-    /**
-     * Gets ref
-     *
-     * @return string|null
-     */
-    public function getRef()
+    public function getRef(): ?string
     {
         return $this->container['ref'];
     }
 
-    /**
-     * Sets ref
-     *
-     * @param string|null $ref Reference ID for line item.
-     *
-     * @return $this
-     */
-    public function setRef($ref)
+    public function setRef(?string $ref): self
     {
         $this->container['ref'] = $ref;
 
         return $this;
     }
 
-    /**
-     * Gets from
-     *
-     * @return \PhoneBurner\AvalaraAFC\Model\Location|null
-     */
-    public function getFrom()
+    public function getFrom(): ?Location
     {
         return $this->container['from'];
     }
 
-    /**
-     * Sets from
-     *
-     * @param \PhoneBurner\AvalaraAFC\Model\Location|null $from from
-     *
-     * @return $this
-     */
-    public function setFrom($from)
+    public function setFrom(?Location $from): self
     {
         $this->container['from'] = $from;
 
         return $this;
     }
 
-    /**
-     * Gets to
-     *
-     * @return \PhoneBurner\AvalaraAFC\Model\Location|null
-     */
-    public function getTo()
+    public function getTo(): ?Location
     {
         return $this->container['to'];
     }
 
-    /**
-     * Sets to
-     *
-     * @param \PhoneBurner\AvalaraAFC\Model\Location|null $to to
-     *
-     * @return $this
-     */
-    public function setTo($to)
+    public function setTo(?Location $to): self
     {
         $this->container['to'] = $to;
 
         return $this;
     }
 
-    /**
-     * Gets chg
-     *
-     * @return double|null
-     */
-    public function getChg()
+    public function getChg(): ?float
     {
         return $this->container['chg'];
     }
 
-    /**
-     * Sets chg
-     *
-     * @param double|null $chg Charge amount.  Default: 0.
-     *
-     * @return $this
-     */
-    public function setChg($chg)
+    public function setChg(?float $chg): self
     {
         $this->container['chg'] = $chg;
 
         return $this;
     }
 
-    /**
-     * Gets line
-     *
-     * @return int|null
-     */
-    public function getLine()
+    public function getLine(): ?int
     {
         return $this->container['line'];
     }
 
-    /**
-     * Sets line
-     *
-     * @param int|null $line Number of lines.  Default: 0.
-     *
-     * @return $this
-     */
-    public function setLine($line)
+    public function setLine(?int $line): self
     {
         $this->container['line'] = $line;
 
         return $this;
     }
 
-    /**
-     * Gets loc
-     *
-     * @return int|null
-     */
-    public function getLoc()
+    public function getLoc(): ?int
     {
         return $this->container['loc'];
     }
 
-    /**
-     * Sets loc
-     *
-     * @param int|null $loc Number of locations.  Default: 0.
-     *
-     * @return $this
-     */
-    public function setLoc($loc)
+    public function setLoc(?int $loc): self
     {
         $this->container['loc'] = $loc;
 
         return $this;
     }
 
-    /**
-     * Gets min
-     *
-     * @return double|null
-     */
-    public function getMin()
+    public function getMin(): ?float
     {
         return $this->container['min'];
     }
 
-    /**
-     * Sets min
-     *
-     * @param double|null $min Number of minutes.  Default: 0.
-     *
-     * @return $this
-     */
-    public function setMin($min)
+    public function setMin(?float $min): self
     {
         $this->container['min'] = $min;
 
@@ -907,72 +801,36 @@ class LineItem implements ModelInterface, ArrayAccess
         return $this;
     }
 
-    /**
-     * Gets date
-     *
-     * @return \DateTime|null
-     */
-    public function getDate()
+    public function getDate(): ?DateTimeImmutable
     {
         return $this->container['date'];
     }
 
-    /**
-     * Sets date
-     *
-     * @param \DateTime|null $date Invoice date.
-     *
-     * @return $this
-     */
-    public function setDate($date)
+    public function setDate(?DateTimeImmutable $date): self
     {
         $this->container['date'] = $date;
 
         return $this;
     }
 
-    /**
-     * Gets qty
-     *
-     * @return int|null
-     */
-    public function getQty()
+    public function getQty(): ?int
     {
         return $this->container['qty'];
     }
 
-    /**
-     * Sets qty
-     *
-     * @param int|null $qty Quantity to be applied to the item - taxation is equivalent to repeating the item the number of times of the quantity
-     *
-     * @return $this
-     */
-    public function setQty($qty)
+    public function setQty(?int $qty): self
     {
         $this->container['qty'] = $qty;
 
         return $this;
     }
 
-    /**
-     * Gets glref
-     *
-     * @return string|null
-     */
-    public function getGlref()
+    public function getGlref(): ?string
     {
         return $this->container['glref'];
     }
 
-    /**
-     * Sets glref
-     *
-     * @param string|null $glref General Ledger reference to be used in reporting
-     *
-     * @return $this
-     */
-    public function setGlref($glref)
+    public function setGlref(?string $glref): self
     {
         $this->container['glref'] = $glref;
 
@@ -999,7 +857,7 @@ class LineItem implements ModelInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
@@ -1036,22 +894,17 @@ class LineItem implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return json_encode(
-            ObjectSerializer::sanitizeForSerialization($this),
-            JSON_PRETTY_PRINT
-        );
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
     }
 
     /**
      * Gets a header-safe presentation of the object
-     *
-     * @return string
      */
-    public function toHeaderValue()
+    public function toHeaderValue(): string
     {
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_THROW_ON_ERROR);
     }
 }
 

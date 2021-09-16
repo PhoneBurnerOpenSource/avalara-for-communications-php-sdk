@@ -29,8 +29,9 @@
 
 namespace PhoneBurner\AvalaraAFC\Model;
 
-use \ArrayAccess;
-use \PhoneBurner\AvalaraAFC\ObjectSerializer;
+use ArrayAccess;
+use DateTimeImmutable;
+use PhoneBurner\AvalaraAFC\ObjectSerializer;
 
 /**
  * GeoBatchLogItem Class Doc Comment
@@ -43,22 +44,20 @@ use \PhoneBurner\AvalaraAFC\ObjectSerializer;
  */
 class GeoBatchLogItem implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
-      *
-      * @var string
       */
-    protected static $openAPIModelName = 'GeoBatchLogItem';
+    protected static string $openAPIModelName = 'GeoBatchLogItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $openAPITypes = [
-        'date' => '\DateTime',
+    protected static array $openAPITypes = [
+        'date' => DateTimeImmutable::class,
         'status' => 'string',
         'message' => 'string'
     ];
@@ -68,7 +67,7 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
       *
       * @var string[]
       */
-    protected static $openAPIFormats = [
+    protected static array $openAPIFormats = [
         'date' => 'date-time',
         'status' => null,
         'message' => null
@@ -76,20 +75,16 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
 
     /**
      * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
      */
-    public static function openAPITypes()
+    public static function openAPITypes(): array
     {
         return self::$openAPITypes;
     }
 
     /**
      * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
      */
-    public static function openAPIFormats()
+    public static function openAPIFormats(): array
     {
         return self::$openAPIFormats;
     }
@@ -100,7 +95,7 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'date' => 'Date',
         'status' => 'Status',
         'message' => 'Message'
@@ -111,7 +106,7 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'date' => 'setDate',
         'status' => 'setStatus',
         'message' => 'setMessage'
@@ -122,7 +117,7 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'date' => 'getDate',
         'status' => 'getStatus',
         'message' => 'getMessage'
@@ -131,40 +126,32 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
     /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
-     *
-     * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
 
     /**
      * The original name of the model.
-     *
-     * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$openAPIModelName;
     }
@@ -178,7 +165,7 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
      *
      * @var mixed[]
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
@@ -188,101 +175,64 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['date'] = isset($data['date']) ? $data['date'] : null;
-        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['date'] = $data['date'] ?? null;
+        $this->container['status'] = $data['status'] ?? null;
+        $this->container['message'] = $data['message'] ?? null;
     }
 
     /**
      * Show all the invalid properties with reasons.
-     *
-     * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
      * return true if all passed
-     *
-     * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets date
-     *
-     * @return \DateTime|null
      */
-    public function getDate()
+    public function getDate(): ?DateTimeImmutable
     {
         return $this->container['date'];
     }
 
     /**
      * Sets date
-     *
-     * @param \DateTime|null $date DateTime of Log.
-     *
-     * @return $this
      */
-    public function setDate($date)
+    public function setDate(?DateTimeImmutable $date): self
     {
         $this->container['date'] = $date;
 
         return $this;
     }
 
-    /**
-     * Gets status
-     *
-     * @return string|null
-     */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->container['status'];
     }
 
-    /**
-     * Sets status
-     *
-     * @param string|null $status Level of Status.
-     *
-     * @return $this
-     */
-    public function setStatus($status)
+    public function setStatus(?string $status): self
     {
         $this->container['status'] = $status;
 
         return $this;
     }
 
-    /**
-     * Gets message
-     *
-     * @return string|null
-     */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->container['message'];
     }
 
-    /**
-     * Sets message
-     *
-     * @param string|null $message Output File Name.
-     *
-     * @return $this
-     */
-    public function setMessage($message)
+    public function setMessage(?string $message): self
     {
         $this->container['message'] = $message;
 
@@ -292,10 +242,8 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
      * Returns true if offset exists. False otherwise.
      *
      * @param integer $offset Offset
-     *
-     * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -343,25 +291,18 @@ class GeoBatchLogItem implements ModelInterface, ArrayAccess
 
     /**
      * Gets the string presentation of the object
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return json_encode(
-            ObjectSerializer::sanitizeForSerialization($this),
-            JSON_PRETTY_PRINT
-        );
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
     }
 
     /**
      * Gets a header-safe presentation of the object
-     *
-     * @return string
      */
-    public function toHeaderValue()
+    public function toHeaderValue(): string
     {
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_THROW_ON_ERROR);
     }
 }
 

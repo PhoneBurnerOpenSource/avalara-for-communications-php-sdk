@@ -30,6 +30,7 @@
 namespace PhoneBurner\AvalaraAFC\Model;
 
 use \ArrayAccess;
+use DateTimeImmutable;
 use \PhoneBurner\AvalaraAFC\ObjectSerializer;
 
 /**
@@ -58,8 +59,8 @@ class ServiceInfo implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'server_time' => '\DateTime',
-        'versions' => '\PhoneBurner\AvalaraAFC\Model\VersionInfo',
+        'server_time' => DateTimeImmutable::class,
+        'versions' => VersionInfo::class,
         'error' => 'string'
     ];
 
@@ -195,23 +196,17 @@ class ServiceInfo implements ModelInterface, ArrayAccess
 
     /**
      * Show all the invalid properties with reasons.
-     *
-     * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
      * return true if all passed
-     *
-     * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -219,10 +214,8 @@ class ServiceInfo implements ModelInterface, ArrayAccess
 
     /**
      * Gets server_time
-     *
-     * @return \DateTime|null
      */
-    public function getServerTime()
+    public function getServerTime(): ?DateTimeImmutable
     {
         return $this->container['server_time'];
     }
@@ -230,59 +223,35 @@ class ServiceInfo implements ModelInterface, ArrayAccess
     /**
      * Sets server_time
      *
-     * @param \DateTime|null $server_time Server time.
+     * @param \DateTimeImmutable|null $server_time Server time.
      *
      * @return $this
      */
-    public function setServerTime($server_time)
+    public function setServerTime(?DateTimeImmutable $server_time): self
     {
         $this->container['server_time'] = $server_time;
 
         return $this;
     }
 
-    /**
-     * Gets versions
-     *
-     * @return \PhoneBurner\AvalaraAFC\Model\VersionInfo|null
-     */
-    public function getVersions()
+    public function getVersions(): ?VersionInfo
     {
         return $this->container['versions'];
     }
 
-    /**
-     * Sets versions
-     *
-     * @param \PhoneBurner\AvalaraAFC\Model\VersionInfo|null $versions versions
-     *
-     * @return $this
-     */
-    public function setVersions($versions)
+    public function setVersions(?VersionInfo $versions): self
     {
         $this->container['versions'] = $versions;
 
         return $this;
     }
 
-    /**
-     * Gets error
-     *
-     * @return string|null
-     */
-    public function getError()
+    public function getError(): ?string
     {
         return $this->container['error'];
     }
 
-    /**
-     * Sets error
-     *
-     * @param string|null $error Error information.
-     *
-     * @return $this
-     */
-    public function setError($error)
+    public function setError(?string $error): self
     {
         $this->container['error'] = $error;
 
@@ -343,15 +312,10 @@ class ServiceInfo implements ModelInterface, ArrayAccess
 
     /**
      * Gets the string presentation of the object
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return json_encode(
-            ObjectSerializer::sanitizeForSerialization($this),
-            JSON_PRETTY_PRINT
-        );
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
     }
 
     /**
@@ -359,9 +323,9 @@ class ServiceInfo implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function toHeaderValue()
+    public function toHeaderValue(): string
     {
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_THROW_ON_ERROR);
     }
 }
 
