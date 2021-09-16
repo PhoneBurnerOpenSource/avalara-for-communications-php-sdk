@@ -30,6 +30,7 @@
 namespace PhoneBurner\AvalaraAFC\Model;
 
 use \ArrayAccess;
+use DateTimeImmutable;
 use \PhoneBurner\AvalaraAFC\ObjectSerializer;
 
 /**
@@ -60,10 +61,10 @@ class Invoice implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'doc' => 'string',
         'cmmt' => 'bool',
-        'bill' => '\PhoneBurner\AvalaraAFC\Model\Location',
+        'bill' => Location::class,
         'cust' => 'int',
         'lfln' => 'bool',
-        'date' => '\DateTime',
+        'date' => DateTimeImmutable::class,
         'exms' => '\PhoneBurner\AvalaraAFC\Model\TaxExemption[]',
         'itms' => '\PhoneBurner\AvalaraAFC\Model\LineItem[]',
         'invm' => 'bool',
@@ -74,7 +75,7 @@ class Invoice implements ModelInterface, ArrayAccess
         'custref' => 'string',
         'invn' => 'string',
         'bcyc' => 'string',
-        'bpd' => '\PhoneBurner\AvalaraAFC\Model\BillingPeriod',
+        'bpd' => BillingPeriod::class,
         'ccycd' => 'string'
     ];
 
@@ -430,7 +431,7 @@ class Invoice implements ModelInterface, ArrayAccess
     /**
      * Gets date
      *
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
     public function getDate()
     {
@@ -440,7 +441,7 @@ class Invoice implements ModelInterface, ArrayAccess
     /**
      * Sets date
      *
-     * @param \DateTime|null $date Invoice date.
+     * @param \DateTimeImmutable|null $date Invoice date.
      *
      * @return $this
      */
