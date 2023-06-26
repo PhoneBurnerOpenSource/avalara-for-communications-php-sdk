@@ -1,0 +1,11 @@
+# Directories
+.tmp/
+.idea/
+vendor/
+build/
+
+# Files
+.cache
+.env
+.phpunit.result.cache
+docker-compose.override.yml

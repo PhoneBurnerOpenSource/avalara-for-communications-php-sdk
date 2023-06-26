@@ -1,0 +1,28 @@
+services:
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: php
+      pull: true
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ./settings.ini
+        target: /usr/local/etc/php/conf.d/settings.ini
+      - type: volume
+        source: composer-cache
+        target: /home/dev/.composer
+      - type: tmpfs
+        target: /tmp
+    environment:
+      PHP_IDE_CONFIG: "serverName=cli"
+      XDEBUG_CONFIG: "client_host=${CLIENT_HOST:-172.20.0.1} start_with_request=trigger idekey=${IDEKEY:-PHPSTORM}"
+      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+
+volumes:
+  composer-cache:
