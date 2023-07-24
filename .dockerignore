@@ -1,0 +1,11 @@
+.cache/
+.git/
+.idea
+vendor/
+
+.editorconfig
+.env
+.gitattributes
+.gitignore
+docker-compose.yml
+settings.ini
